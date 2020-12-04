@@ -1,0 +1,93 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3.9",
+        "akaunting/money": "^1.1",
+        "biscolab/laravel-recaptcha": "^4.4",
+        "brotzka/laravel-dotenv-editor": "^2.1",
+        "darryldecode/cart": "~4.0",
+        "doctrine/dbal": "^2.9",
+        "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.5",
+        "joedixon/laravel-translation": "^1.1",
+        "kkomelin/laravel-translatable-string-exporter": "^1.10",
+        "laravel-frontend-presets/argon": "^1.0",
+        "laravel-notification-channels/onesignal": "v2.2.0",
+        "laravel-notification-channels/twilio": "^3.1.2",
+        "laravel/cashier": "12.4.2",
+        "laravel/framework": "^8.0",
+        "laravel/helpers": "^1.3",
+        "laravel/socialite": "5.0.3",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.0",
+        "maatwebsite/excel": "^3.1",
+        "mcamara/laravel-localization": "^1.6",
+        "onecentlin/laravel-adminer": "^4.7",
+        "paypal/rest-api-sdk-php": "*",
+        "pcinaglia/laraupdater": "^1.0",
+        "rachidlaasri/laravel-installer": "^4.0",
+        "sentry/sentry-laravel": "2.1.1",
+        "silviolleite/laravelpwa": "^2.0",
+        "spatie/geocoder": "^3.4",
+        "spatie/laravel-googletagmanager": "^2.6",
+        "spatie/laravel-permission": "^3.0",
+        "stripe/stripe-php": "^7.34",
+        "twilio/sdk": "^6.8",
+        "unicodeveloper/laravel-paystack": "^1.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
+        "beyondcode/laravel-dump-server": "^1.0",
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}
