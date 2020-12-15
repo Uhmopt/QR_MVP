@@ -16,9 +16,9 @@
 
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head> 
+<head>
     <!-- Primary Meta Tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -74,7 +74,7 @@
     <header class="header-global">
         @include('qrsaas.partials.nav')
     </header>
-    
+
     <main>
 
          <!-- Loader -->
@@ -104,7 +104,7 @@
 
         <!-- Footer -->
         @include('qrsaas.partials.footer')
-    
+
     </main>
 
     <!-- Core -->
@@ -127,8 +127,8 @@
 
     <!-- Custom JS defined by admin -->
     <?php echo file_get_contents(base_path('public/byadmin/front.js')) ?>
-    
-    
+
+
 </body>
 
 </html>

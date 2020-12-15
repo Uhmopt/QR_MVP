@@ -23,7 +23,7 @@
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('custom') }}/css/custom.css" rel="stylesheet">
-    
+
     <!-- Select2 -->
     <link type="text/css" href="{{ asset('custom') }}/css/select2.min.css" rel="stylesheet">
 
