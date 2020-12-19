@@ -16,7 +16,7 @@ class City extends MyModel
 
     public function getLogoAttribute()
     {
-        return $this->getImge($this->image,config('global.restorant_details_image'));
+        return $this->getImage($this->image,config('global.restorant_details_image'));
     }
     
 }

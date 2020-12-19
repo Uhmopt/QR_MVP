@@ -5,7 +5,15 @@
 
     <section class="section-profile-cover section-shaped grayscale-05 d-none d-md-none d-lg-block d-lx-block">
       <!-- Circles background -->
-      <img class="bg-image" loading="lazy" src="@if( $branch != NULL ) {{ $branch->coverm }} @else {{ $restorant->coverm }} @endif" style="width: 100%;">
+        <img class="bg-image" loading="lazy" src="@if( $branch != NULL ) {{ $branch->coverm }} @else {{ $restorant->coverm }} @endif" style="width: 100%;" />
+        <img style="
+            position: absolute !important;
+            top: 40%;
+            width: 110px;
+            height: 110px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        " src={{ $restorant->logom }} />
       <!-- SVG separator -->
       <div class="separator separator-bottom separator-skew">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -13,26 +21,25 @@
         </svg>
       </div>
     </section>
-
     <section class="section pt-lg-0 mb--5 mt--9 d-none d-md-none d-lg-block d-lx-block">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title white"  <?php if($restorant->description || $openingTime && $closingTime){echo 'style="border-bottom: 1px solid #f2f2f2;"';} ?> >
-                        <h1 class="display-3 text-white" data-toggle="modal" data-target="#modal-restaurant-info" style="cursor: pointer;">
+                        <h1 class="display-3 text-white" data-toggle="modal" data-target="#modal-restaurant-info" style="cursor: pointer; text-align: center">
                         {{ $restorant->name }}
                         @if( $branch != NULL )
-                            <br/>{{ __($branch->name) }}
+                            <br/><p><b>{{ __($branch->name) }}</b></p>
                         @endif
                         </h1>
-                        <p class="display-4" style="margin-top: 120px">
+                        <p class="display-4" style="margin-top: 120px; text-align: center;">
                         @if( $branch != NULL )
                             {{ $branch->description }}
                         @else
                             {{ $restorant->description }}
                         @endif
                         </p>
-                        <p>@if(!empty($openingTime) && !empty($closingTime))  <i class="ni ni-watch-time"></i> <span>{{ $openingTime }}</span> - <span>{{ $closingTime }}</span> | @endif  <i class="ni ni-pin-3"></i></i> <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=
+                        <p style="text-align: center;">@if(!empty($openingTime) && !empty($closingTime))  <i class="ni ni-watch-time"></i> <span>{{ $openingTime }}</span> - <span>{{ $closingTime }}</span> | @endif  <i class="ni ni-pin-3"></i></i> <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=
                         @if( $branch != NULL )
                             {{ urlencode($branch->address) }}
                         @else

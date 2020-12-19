@@ -39,16 +39,16 @@ class Restorant extends MyModel
 
     public function getLogomAttribute()
     {
-        return $this->getImge($this->logo,config('global.restorant_details_image'));
+        return $this->getImage($this->logo,config('global.restorant_details_image'));
     }
     public function getIconAttribute()
     {
-        return $this->getImge($this->logo,str_replace("_large.jpg","_thumbnail.jpg",config('global.restorant_details_image')),"_thumbnail.jpg");
+        return $this->getImage($this->logo,str_replace("_large.jpg","_thumbnail.jpg",config('global.restorant_details_image')),"_thumbnail.jpg");
     }
 
     public function getCovermAttribute()
     {
-        return $this->getImge($this->cover,config('global.restorant_details_cover_image'),"_cover.jpg");
+        return $this->getImage($this->cover,config('global.restorant_details_cover_image'),"_cover.jpg");
     }
 
     public function categories()

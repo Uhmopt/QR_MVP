@@ -80,6 +80,7 @@
                                                         
                                                         
                                                     </form>
+                                                    <a class="dropdown-item" href="{{ route('branch.showList', $restorant) }}">{{ __('Manage Branch') }}</a>
 
                                                 </div>
                                             </div>

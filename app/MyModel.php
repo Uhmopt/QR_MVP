@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MyModel extends Model
 {
-    protected function getImge($imageValue,$default,$version="_large.jpg"){
+    protected function getImage($imageValue,$default,$version="_large.jpg"){
         if($imageValue==""||$imageValue==null){
             //No image
             return $default;

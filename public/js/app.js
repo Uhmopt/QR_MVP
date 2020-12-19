@@ -49878,8 +49878,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\laravel_workspace\20201024_qr_mvp_master\qr-mvp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\laravel_workspace\20201024_qr_mvp_master\qr-mvp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\work\Working\18_laravel\QR_work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\work\Working\18_laravel\QR_work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

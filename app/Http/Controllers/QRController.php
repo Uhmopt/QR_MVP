@@ -45,7 +45,6 @@ class QRController extends Controller
          
          if(auth()->user()->hasRole('owner')){
              $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain."/".$branch->name;
-             echo($linkToTheMenu);
          }
  
          if(env('WILDCARD_DOMAIN_READY',false)){

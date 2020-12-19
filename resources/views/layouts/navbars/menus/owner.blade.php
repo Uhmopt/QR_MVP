@@ -18,7 +18,7 @@
     @endif
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.restaurants.edit',  auth()->user()->restorant->id) }}">
+        <a class="nav-link" href="{{ route('admin.restaurants.index') }}">
             <i class="ni ni-shop text-info"></i> {{ __('Restaurant') }}
         </a>
     </li>
@@ -27,11 +27,11 @@
             <i class="ni ni-collection text-pink"></i> {{ __('Menu') }}
         </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('branch.index') }}">
             <i class="ni ni-bullet-list-67 text-blue"></i> {{ __('Branch') }}
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('qr') }}">

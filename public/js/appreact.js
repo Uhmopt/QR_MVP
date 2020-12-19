@@ -82299,7 +82299,7 @@ var QRBuilder = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-xl-4"
+        className: "col-xl-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card bg-secondary shadow"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82369,7 +82369,7 @@ var QRBuilder = /*#__PURE__*/function (_Component) {
         color: this.state.color2,
         onChangeComplete: this.handleChangeColor2
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-xl-4"
+        className: "col-xl-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card bg-secondary shadow"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82415,69 +82415,7 @@ var QRBuilder = /*#__PURE__*/function (_Component) {
         id: "dl-image-inner-jpg",
         src: this.state.imgData,
         alt: "\u957F\u6309\u4FDD\u5B58\u4E8C\u7EF4\u7801"
-      }))) : null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-xl-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card bg-secondary shadow"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header bg-white border-0"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row align-items-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "mb-0"
-      }, this.state.passedData.titleTemplate)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body",
-        id: "section-to-print"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "carouselExampleIndicators",
-        className: "carousel slide",
-        "data-ride": "carousel"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-        className: "carousel-indicators"
-      }, this.state.passedData.templates.map(function (value, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          "data-target": "#carouselExampleIndicators",
-          "data-slide-to": index,
-          className: index == 0 ? "active" : ""
-        });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "carousel-inner"
-      }, this.state.passedData.templates.map(function (value, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: value,
-          className: "carousel-item " + (index == 0 ? "active" : "")
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "d-block w-100",
-          src: value
-        }));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "carousel-control-prev",
-        href: "#carouselExampleIndicators",
-        role: "button",
-        "data-slide": "prev"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "carousel-control-prev-icon",
-        "aria-hidden": "true"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "sr-only"
-      }, "Previous")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "carousel-control-next",
-        href: "#carouselExampleIndicators",
-        role: "button",
-        "data-slide": "next"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "carousel-control-next-icon",
-        "aria-hidden": "true"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "sr-only"
-      }, "Next"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: this.state.passedData.linkToTemplates,
-        target: "_blank",
-        type: "button",
-        className: "btn btn-success"
-      }, this.state.passedData.downloadPrintTemplates)))));
+      }))) : null))));
     }
   }]);
 
@@ -82502,7 +82440,7 @@ if (document.getElementById('qrgen')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\laravel_workspace\20201024_qr_mvp_master\qr-mvp\resources\js\appreact.js */"./resources/js/appreact.js");
+module.exports = __webpack_require__(/*! D:\work\Working\18_laravel\QR_work\resources\js\appreact.js */"./resources/js/appreact.js");
 
 
 /***/ })

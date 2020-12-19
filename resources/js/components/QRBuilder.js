@@ -148,7 +148,7 @@ export default class QRBuilder extends Component {
         var QRStylesPart2=["QRImage","QRResImage","QRBubble","QRLine"];
         return (
             <div className="row">
-                <div className="col-xl-4">
+                <div className="col-xl-6">
                     <br/>
                     <div className="card bg-secondary shadow">
                         <div className="card-header bg-white border-0">
@@ -196,7 +196,7 @@ export default class QRBuilder extends Component {
                     </div>  
                 </div>
            
-                <div className="col-xl-4">
+                <div className="col-xl-6">
                     <br/>
                     <div className="card bg-secondary shadow">
                             <div className="card-header bg-white border-0">
@@ -228,7 +228,7 @@ export default class QRBuilder extends Component {
                 </div>
 
 
-                <div className="col-xl-4">
+                {/* <div className="col-xl-4">
                     <br/>
                     <div className="card bg-secondary shadow">
                             <div className="card-header bg-white border-0">
@@ -271,7 +271,7 @@ export default class QRBuilder extends Component {
                     </div>
 
 
-                </div>
+                </div> */}
 
 
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Notifications\BranchCreated;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\WelcomeNotification;
+use App\Restorant;
 
 class BranchController extends Controller
 {
@@ -93,6 +94,20 @@ class BranchController extends Controller
         $manager->notify(new BranchCreated($generatedPassword,$branch,$manager));
         
         return redirect()->route('branch.index')->withStatus(__('Branch successfully created.'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showList(Restorant $restorant)
+    {
+        //
+        if(auth()->user()->hasRole('owner')){
+            return view('branch.index', ['branches' => $restorant->branches()->orderBy('id', 'desc')->paginate(10)]);
+        }else return redirect()->route('/')->withStatus(__('No Access'));       
     }
 
     /**

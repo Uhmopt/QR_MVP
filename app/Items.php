@@ -17,7 +17,7 @@ class Items extends Model
     protected $fillable = ['name','description','image','price','category_id','vat'];
     protected $imagePath='/uploads/restorants/';
 
-    protected function getImge($imageValue,$default,$version="_large.jpg"){
+    protected function getImage($imageValue,$default,$version="_large.jpg"){
         if($imageValue==""||$imageValue==null){
             //No image
             return $default;
@@ -52,11 +52,11 @@ class Items extends Model
 
     public function getLogomAttribute()
     {
-        return $this->getImge($this->image,config('global.restorant_details_image'));
+        return $this->getImage($this->image,config('global.restorant_details_image'));
     }
     public function getIconAttribute()
     {
-        return $this->getImge($this->image,config('global.restorant_details_image'),'_thumbnail.jpg');
+        return $this->getImage($this->image,config('global.restorant_details_image'),'_thumbnail.jpg');
     }
 
     public function getItempriceAttribute()
