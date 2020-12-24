@@ -183,6 +183,18 @@ Route::post('phone/verify', 'PhoneVerificationController@verify')->name('phoneve
 Route::get('/get/rlocation/{restorant}', 'RestorantController@getLocation');
 Route::get('/items/variants/{variant}/extras', 'Items\VariantsController@extras')->name('items.variants.extras');
 
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from Splash',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\RestaurantMail($details));
+   
+    dd("Email is Sent.");
+});
+
 // });
 //Languages routes
 $availableLanguagesENV = ENV('FRONT_LANGUAGES', "EN,English,IT,Italian,FR,French,DE,German,ES,Spanish,RU,Russian,PT,Portuguese,TR,Turkish,AR,Arabic");
