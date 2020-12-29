@@ -134,7 +134,7 @@ class RestorantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Restorant $restaurant)
-    {
+    { 
         //Days of the week
         $timestamp = strtotime('next Sunday');
         for ($i = 0; $i < 7; $i++) {
@@ -155,7 +155,7 @@ class RestorantController extends Controller
         $hours = Hours::where(['restorant_id' => $restaurant->id])->get($hoursRange)->first();
 
         if(auth()->user()->id==$restaurant->user_id||auth()->user()->hasRole('admin')){
-            //return view('restorants.edit', compact('restorant'));
+            //return view('restorants.edit', compact('restorant'));  
             return view('restorants.edit',[
                 'restorant' => $restaurant,
                 'days' => $days,
@@ -345,7 +345,7 @@ class RestorantController extends Controller
 
     public function storeRegisterRestaurant(Request $request)
     {
-        //Validate first
+        //Validate first  
         $theRules=[
             'name' => ['required', 'string', 'unique:restorants,name', 'max:255'],
             'name_owner' => ['required', 'string', 'max:255'],
@@ -364,11 +364,9 @@ class RestorantController extends Controller
         $owner = new User;
         $owner->name = strip_tags($request->name_owner);
         $owner->email = strip_tags($request->email_owner);
-        $owner->phone = strip_tags($request->phone_owner)|"";
+        $owner->phone = strip_tags($request->phonenumber)|""; 
         $owner->active = 0;
-        $owner->api_token = Str::random(80);
-
-        
+        $owner->api_token = Str::random(80); 
 
         $owner->password = null;
         $owner->save();
@@ -390,12 +388,13 @@ class RestorantController extends Controller
         $restaurant->name = strip_tags($request->name);
         $restaurant->user_id = $owner->id;
         $restaurant->description = strip_tags($request->description."");
+        $restaurant->branchnum = $request->wish_branch_number;
         $restaurant->minimum = $request->minimum|0;
         $restaurant->lat = 0;
         $restaurant->lng = 0;
         $restaurant->address = "";
         $restaurant->phone = strip_tags($request->phone_owner)|"";
-        //$restaurant->subdomain=strtolower(preg_replace('/[^A-Za-z0-9]/', '', strip_tags($request->name)));
+        // $restaurant->subdomain=strtolower(preg_replace('/[^A-Za-z0-9]/', '', strip_tags($request->name)));
         $restaurant->active = 0;
         $restaurant->subdomain = null;
         //$restaurant->logo = "";
@@ -446,7 +445,7 @@ class RestorantController extends Controller
     }
 
     public function activateRestaurant(Restorant $restaurant)
-    {
+    { 
         $this->makeRestaurantActive($restaurant);
         return redirect()->route('admin.restaurants.index')->withStatus(__('Restaurant successfully activated.'));
     }

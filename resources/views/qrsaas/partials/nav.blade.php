@@ -4,7 +4,7 @@
             <img class="navbar-brand-dark common" src="{{ config('global.site_logo') }}" height="35" alt="Logo">
             <img class="navbar-brand-light common" src="{{ config('global.site_logo') }}" height="35" alt="Logo">
         </a>
-        <div class="navbar-collapse collapse" id="navbar_global">
+        <div class="navbar-collapse collapse justify-content-center" id="navbar_global">
             <div class="navbar-collapse-header">
                 <div class="row">
                     <div class="col-6 collapse-brand">

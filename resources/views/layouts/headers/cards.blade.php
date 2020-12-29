@@ -51,8 +51,8 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">{{ __('Number of Brunches') }}</h5>
-                                    <span class="h2 font-weight-bold mb-0"> 
-                                    {{ auth()->user()->restorant->branches->count() }} branches</span>
+                                    <span class="h2 font-weight-bold mb-0">
+                                    {{ auth()->user()->restorant ? auth()->user()->restorant->branches->count(): '0' }} branches</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -70,7 +70,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">{{ __('VIEWS') }}</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{ auth()->user()->restorant->branches->count() + 1 }} views</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ auth()->user()->restorant ? auth()->user()->restorant->branches->count() + 1 : '0' }} views</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">

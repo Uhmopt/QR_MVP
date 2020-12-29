@@ -76,10 +76,9 @@
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to deactivate this restaurant?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Deactivate') }}
                                                         </button>
-                                                        @endif
+                                                        @endif 
                                                         
-                                                        
-                                                    </form>
+                                                    </form> 
                                                     <a class="dropdown-item" href="{{ route('branch.showList', $restorant) }}">{{ __('Manage Branch') }}</a>
 
                                                 </div>

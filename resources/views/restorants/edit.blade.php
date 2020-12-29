@@ -29,7 +29,7 @@
                             <a target="_blank"
                                 href="{{ (isset($_SERVER['HTTPS'])&&$_SERVER["HTTPS"] ?"https://":"http://").$restorant->subdomain.".".$_SERVER['HTTP_HOST'] }}"
                                 class="btn btn-sm btn-success">{{ __('View it') }}</a>
-                            @else
+                            @else  
                             <a target="_blank" href="{{ route('vendor',$restorant->subdomain) }}"
                                 class="btn btn-sm btn-success">{{ __('View it') }}</a>
                             @endif
@@ -145,7 +145,7 @@
                                     ]
                                         ?>
                                 @foreach ($images as $image)
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-sm-12">
                                     @include('partials.images',$image)
                                 </div>
                                 @endforeach

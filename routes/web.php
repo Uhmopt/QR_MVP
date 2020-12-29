@@ -149,7 +149,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('branch/index', 'BranchController@index')->name('branch.index');
     Route::get('branch/showlist/{restorant}', 'BranchController@showList')->name('branch.showList');
-    Route::get('branch/create', 'BranchController@create')->name('branch.create');
+    Route::get('branch/create/', 'BranchController@create')->name('branch.create');
     Route::get('branch/{branch}/edit', 'BranchController@edit')->name('branch.edit');
     Route::post('branch/store', 'BranchController@store')->name('branch.store');
     Route::put('branch/{branch}/update', 'BranchController@update')->name('branch.update');

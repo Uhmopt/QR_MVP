@@ -12,6 +12,7 @@ use App\Notifications\BranchCreated;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\WelcomeNotification;
 use App\Restorant;
+use Session;
 
 class BranchController extends Controller
 {
@@ -23,9 +24,9 @@ class BranchController extends Controller
      */
     public function index(Branch $branches)
     {
-        //
+        //  
         if(auth()->user()->hasRole('owner')){
-            return view('branch.index', ['branches' => $branches->orderBy('id', 'desc')->paginate(10)]);
+            return view('branch.index', ['branches' => session('restorant')->branches()->orderBy('id', 'desc')->paginate(10)]);
         }else return redirect()->route('/')->withStatus(__('No Access'));        
     }
 
@@ -34,12 +35,12 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Restorant $restorant)
     {
-        //
+        // 
         if(auth()->user()->hasRole('owner')){
-
-            if(auth()->user()->restorant->branchnum <= auth()->user()->restorant->branches->count())
+            
+            if(session('restorant')->branchnum <= session('restorant')->branches()->count())
             {
                 return redirect()->route('branch.index')->withStatus(__('Can not creat Branch anymore.'));
             }
@@ -67,7 +68,7 @@ class BranchController extends Controller
         ]);
         
         //Create the new user for manager
-        $generatedPassword = Str::random(10);
+        $generatedPassword = Str::random(10); 
         $manager = new User;
         $manager->name = strip_tags($request->name_manager);
         $manager->email = strip_tags($request->email_manager);
@@ -84,7 +85,7 @@ class BranchController extends Controller
         $branch = new Branch;
         $branch->name           =   strip_tags($request->name);
         $branch->user_id        =   $manager->id;
-        $branch->restorant_id   =   auth()->user()->restorant->id;
+        $branch->restorant_id   =   session('restorant')->id;
         $branch->description    =   strip_tags($request->description);
         $branch->address = "";
         $branch->subdomain= $this->createSubdomainFromName(strip_tags($request->name));
@@ -103,8 +104,9 @@ class BranchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showList(Restorant $restorant)
-    {
-        //
+    { 
+        //     
+        Session::put('restorant', $restorant);
         if(auth()->user()->hasRole('owner')){
             return view('branch.index', ['branches' => $restorant->branches()->orderBy('id', 'desc')->paginate(10)]);
         }else return redirect()->route('/')->withStatus(__('No Access'));       
@@ -173,7 +175,7 @@ class BranchController extends Controller
         if(isset($request->city_id)){
             $branch->city_id = $request->city_id;
         }
-
+        
         if($request->hasFile('branch_cover')){
             $branch->cover=$this->saveImageVersions(
                 $this->imagePath,

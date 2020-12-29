@@ -352,7 +352,7 @@
     "Activate": "Activate",
     "Import from CSV": "Import from CSV",
     "Method": "Method",
-    "Delivery / Pickup": "Delivery / Pickup",
+    "Delivery \/ Pickup": "Delivery \/ Pickup",
     "Pickup": "Pickup",
     "Pickup time": "Pickup time",
     "Delivery time": "Delivery time",
@@ -391,7 +391,7 @@
     "Back": "Back",
     "Paid": "Paid",
     "Unpaid": "Unpaid",
-    "Your order is ready for pickup. We are expecting you.":"Your order is ready for pickup. We are expecting you.",
+    "Your order is ready for pickup. We are expecting you.": "Your order is ready for pickup. We are expecting you.",
     "Enter your street or address": "Enter your street or address",
     "Find restaurants": "Find restaurants",
     "DELIVERING TO": "DELIVERING TO",
@@ -432,7 +432,7 @@
     "Edit option": "Edit option",
     "Update": "Update",
     "VAT percentage ( calculated into item price )": "VAT percentage ( calculated into item price )",
-    "Item VAT percentage":"Item VAT percentage",
+    "Item VAT percentage": "Item VAT percentage",
     "Enable variants": "Enable variants",
     "No options values selected": "No options values selected",
     "There are no": "There are no",
@@ -490,5 +490,7 @@
     "Pricing plans": "Pricing plans",
     "Plans": "Plans",
     "You don`t have any plans": "You don`t have any plans",
-    "Add plan": "Add plan"
+    "Add plan": "Add plan",
+    "message": "success",
+    "blog site": "amazing"
 }

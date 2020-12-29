@@ -62,8 +62,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('email_owner') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="email_owner">{{ __('Owner Email') }}</label>
-                                    <input type="email" name="email_owner" id="email_owner" class="form-control form-control-alternative{{ $errors->has('email_owner') ? ' is-invalid' : '' }}" placeholder="{{ __('Owner Email here') }} ..." value="{{ isset($_GET["email"])?$_GET['email']:""}}" required autofocus>
-
+                                    <input type="email" name="email_owner" id="email_owner" class="form-control form-control-alternative{{ $errors->has('email_owner') ? ' is-invalid' : '' }}" placeholder="{{ __('Owner Email here') }} ..." value="{{ isset($_GET["email"])?$_GET['email']:""}}" required autofocus> 
                                     @if ($errors->has('email_owner'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email_owner') }}</strong>
@@ -72,8 +71,8 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('phone_owner') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="phone_owner">{{ __('Owner Phone') }}</label>
-                                    <input type="text" name="phone_owner" id="phone_owner" class="form-control form-control-alternative{{ $errors->has('phone_owner') ? ' is-invalid' : '' }}" placeholder="{{ __('Owner Phone here') }} ..." value="{{ isset($_GET["phone"])?$_GET['phone']:""}}" required autofocus>
-
+                                    <input type="tel" name="phone_owner" id="phone_owner" class="form-control form-control-alternative{{ $errors->has('phone_owner') ? ' is-invalid' : '' }}" placeholder="{{ __('Owner Phone here') }} ..." value="{{ isset($_GET["phone"])?$_GET['phone']:""}}" required autofocus>
+                                    <input id="phonefull" type="hidden" name="phonenumber">
                                     @if ($errors->has('phone_owner'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('phone_owner') }}</strong>
@@ -119,10 +118,18 @@
 
 @section('js')
 <script>
-    window.intlTelInput(document.getElementById("phone_owner"), {
+    var phone_number = window.intlTelInput(document.getElementById("phone_owner"), {
     // any initialisation options go here
-        customContainer: "w-100"
-    });
+        separateDialCode:true,
+        customContainer: "w-100",
+        utilsScript:"{{URL::asset('intl-tel-input/js/utils.js')}}"
+    }); 
+
+    $('#phone_owner').on('change', function() {
+        var intlNumber = phone_number.getNumber(); 
+        $('#phonefull').val(intlNumber);
+    })
+
 </script>
 @if (isset($_GET['name'])&&$errors->isEmpty())
 <script>

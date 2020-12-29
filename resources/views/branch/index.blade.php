@@ -16,8 +16,8 @@
                         <div class="col-8">
                             <h3 class="mb-0">{{ __('Branches') }}</h3>
                         </div>
-                        <div class="col-4 text-right">
-                            @if(auth()->user()->restorant->branchnum > auth()->user()->restorant->branches->count())
+                        <div class="col-4 text-right"> 
+                            @if(session('restorant')->branchnum > session('restorant')->branches()->count())  
                                 <a href="{{ route('branch.create') }}" class="btn btn-sm btn-primary">{{ __('Add Branch') }}</a>
                             @else
                                 <a href="{{ route('branch.create') }}" class="btn btn-sm btn-primary disabled">{{ __('Add Branch') }}</a>

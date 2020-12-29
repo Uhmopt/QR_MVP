@@ -22,10 +22,7 @@
                                     <label class="form-control-label">{{ __('Select your options') }}</label>
                                     <div id="variants-area-inside">
                                     </div>
-                                </div>
-
-
-
+                                </div> 
                                 <div id="exrtas-area">
                                     <br />
                                     <label class="form-control-label" for="quantity">{{ __('Extras') }}</label>
@@ -35,12 +32,12 @@
 
                                 @if(!config('app.isqrsaas'))
                                 <div class="quantity-area">
-
+<!-- 
                                     <div class="form-group">
                                         <br />
                                         <label class="form-control-label" for="quantity">{{ __('Quantity') }}</label>
                                         <input type="number" name="quantity" id="quantity" class="form-control form-control-alternative" placeholder="{{ __('1') }}" value="1" required autofocus>
-                                    </div>
+                                    </div> -->
                                     <div class="quantity-btn">
                                         <div id="addToCart1">
                                             <button class="btn btn-primary" v-on:click='addToCartAct'
