@@ -28,7 +28,7 @@
                     <div class="col-12">
                         @include('partials.flash')
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="min-height:200px">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -79,7 +79,6 @@
                                                         @endif 
                                                         
                                                     </form> 
-                                                    <a class="dropdown-item" href="{{ route('branch.showList', $restorant) }}">{{ __('Manage Branch') }}</a>
 
                                                 </div>
                                             </div>

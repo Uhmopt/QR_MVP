@@ -35,12 +35,8 @@ class RestorantController extends Controller
     public function index(Restorant $restaurants)
     {
         if(auth()->user()->hasRole('admin')){
-            //return view('restorants.index', ['restorants' => $restaurants->where(['active'=>1])->paginate(10)]);
-            return view('restorants.index', ['restorants' => $restaurants->orderBy('id', 'desc')->paginate(10)]);
-        }else if(auth()->user()->hasRole('owner')){
-            //return view('restorants.index', ['restorants' => $restaurants->where(['active'=>1])->paginate(10)]);
-            return view('restorants.index', ['restorants' => $restaurants->where(['active'=>1, 'user_id'=>auth()->user()->id])->orderBy('id', 'desc')->paginate(10)]);
-        }else return redirect()->route('/')->withStatus(__('No Access'));
+            return view('restorants.index', ['restorants' => $restaurants->orderBy('id', 'desc')->paginate(10)]);        
+        }else return redirect()->route('front')->withStatus(__('No Access'));
     }
 
     public function loginas(Restorant $restaurant){
@@ -77,9 +73,8 @@ class RestorantController extends Controller
             'name_owner' => ['required', 'string', 'max:255'],
             'email_owner' => ['required', 'string', 'email', 'unique:users,email', 'max:255'],
             'phone_owner' => ['required', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'wish_branch_number' => ['required', 'string'],
+            'branchnum' => ['required', 'string'],
         ]);
-
         //Create the user
         $generatedPassword = Str::random(10);
         $owner = new User;
@@ -97,7 +92,7 @@ class RestorantController extends Controller
         //Create Restorant
         $restaurant = new Restorant;
         $restaurant->name = strip_tags($request->name);
-        $restaurant->wishbranchnum = strip_tags($request->wish_branch_number);
+        $restaurant->wishbranchnum = strip_tags($request->branchnum);
         $restaurant->name = strip_tags($request->name);
         $restaurant->user_id = $owner->id;
         $restaurant->description = strip_tags($request->description."");

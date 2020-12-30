@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/updateres/radius/{restaurant}', 'RestorantController@updateRadius');
     Route::post('/updateres/delivery/{restaurant}', 'RestorantController@updateDeliveryArea');
     Route::post('/import/restaurants', 'RestorantController@import')->name('import.restaurants');
-    Route::get('/restaurant/{restaurant}/activate', 'RestorantController@activateRestaurant')->name('restaurant.activate');
-    Route::post('/restaurant/workinghours', 'RestorantController@workingHours')->name('restaurant.workinghours');
+    Route::get('/restaurants/{restaurant}/activate', 'RestorantController@activateRestaurant')->name('restaurant.activate');
+    Route::post('/restaurants/workinghours', 'RestorantController@workingHours')->name('restaurant.workinghours');
 
     Route::prefix('finances')->name('finances.')->group(function () {
         Route::get('admin', 'FinanceController@adminFinances')->name('admin');
@@ -148,7 +148,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
     Route::get('branch/index', 'BranchController@index')->name('branch.index');
-    Route::get('branch/showlist/{restorant}', 'BranchController@showList')->name('branch.showList');
+    // Route::get('branch/showlist/{restorant}', 'BranchController@showList')->name('branch.showList');
     Route::get('branch/create/', 'BranchController@create')->name('branch.create');
     Route::get('branch/{branch}/edit', 'BranchController@edit')->name('branch.edit');
     Route::post('branch/store', 'BranchController@store')->name('branch.store');

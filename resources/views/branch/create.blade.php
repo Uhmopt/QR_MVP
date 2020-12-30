@@ -30,7 +30,7 @@
                                 <label class="form-control-label" for="name">{{ __('Branch Name') }}</label>
                                 <input type="text" name="name" id="name"
                                     class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                    placeholder="{{ __('Restaurant Name here') }} ..." value="" required autofocus>
+                                    placeholder="{{ __('Branch Name here') }} ..." value="" required autofocus>
                                 @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('name') }}</strong>

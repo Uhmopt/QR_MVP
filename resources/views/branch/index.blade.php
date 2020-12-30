@@ -17,7 +17,7 @@
                             <h3 class="mb-0">{{ __('Branches') }}</h3>
                         </div>
                         <div class="col-4 text-right"> 
-                            @if(session('restorant')->branchnum > session('restorant')->branches()->count())  
+                            @if(auth()->user()->restorant->branchnum > auth()->user()->restorant->branches->count())
                                 <a href="{{ route('branch.create') }}" class="btn btn-sm btn-primary">{{ __('Add Branch') }}</a>
                             @else
                                 <a href="{{ route('branch.create') }}" class="btn btn-sm btn-primary disabled">{{ __('Add Branch') }}</a>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         @include('partials.flash')
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="min-height:200px">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>

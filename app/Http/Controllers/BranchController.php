@@ -26,8 +26,8 @@ class BranchController extends Controller
     {
         //  
         if(auth()->user()->hasRole('owner')){
-            return view('branch.index', ['branches' => session('restorant')->branches()->orderBy('id', 'desc')->paginate(10)]);
-        }else return redirect()->route('/')->withStatus(__('No Access'));        
+            return view('branch.index', ['branches' => auth()->user()->restorant->branches()->orderBy('id', 'desc')->paginate(10)]);
+        }else return redirect()->route('front')->withStatus(__('No Access'));        
     }
 
     /**
@@ -35,12 +35,12 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Restorant $restorant)
+    public function create()
     {
         // 
         if(auth()->user()->hasRole('owner')){
             
-            if(session('restorant')->branchnum <= session('restorant')->branches()->count())
+            if(auth()->user()->restorant->branchnum <= auth()->user()->restorant->branches()->count())
             {
                 return redirect()->route('branch.index')->withStatus(__('Can not creat Branch anymore.'));
             }
@@ -85,7 +85,7 @@ class BranchController extends Controller
         $branch = new Branch;
         $branch->name           =   strip_tags($request->name);
         $branch->user_id        =   $manager->id;
-        $branch->restorant_id   =   session('restorant')->id;
+        $branch->restorant_id   =   auth()->user()->restorant->id;
         $branch->description    =   strip_tags($request->description);
         $branch->address = "";
         $branch->subdomain= $this->createSubdomainFromName(strip_tags($request->name));
@@ -103,14 +103,14 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showList(Restorant $restorant)
-    { 
-        //     
-        Session::put('restorant', $restorant);
-        if(auth()->user()->hasRole('owner')){
-            return view('branch.index', ['branches' => $restorant->branches()->orderBy('id', 'desc')->paginate(10)]);
-        }else return redirect()->route('/')->withStatus(__('No Access'));       
-    }
+    // public function showList(Restorant $restorant)
+    // { 
+    //     //     
+    //     Session::put('restorant', $restorant);
+    //     if(auth()->user()->hasRole('owner') || auth()->user()->hasRole('admin')){
+    //         return view('branch.index', ['branches' => $restorant->branches()->orderBy('id', 'desc')->paginate(10)]);
+    //     }else return redirect()->route('front')->withStatus(__('No Access'));       
+    // }
 
     /**
      * Display the specified resource.
