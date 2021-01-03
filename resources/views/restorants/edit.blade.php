@@ -290,9 +290,7 @@
 var defaultHourFrom = "09:00";
 var defaultHourTo = "17:00";
 
-var timeFormat = '{{ env('
-TIME_FORMAT ','
-24 hours ') }}';
+var timeFormat = '{{ env('TIME_FORMAT ',' 24 hours ') }}';
 
 function formatAMPM(date) {
     //var hours = date.getHours();
@@ -386,7 +384,7 @@ $("#clear_area").on("click", function() {
 //Initialize working hours
 function initializeWorkingHours() {
     var workingHours = {
-        !!json_encode($hours) !!
+        !!json_encode($hours)!!
     };
     if (workingHours != null) {
         Object.keys(workingHours).map((key, index) => {

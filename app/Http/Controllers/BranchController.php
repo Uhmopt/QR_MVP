@@ -147,9 +147,10 @@ class BranchController extends Controller
             array_push($hoursRange, $from);
             array_push($hoursRange, $to);
         }
-
         // auth check and show the form for editing the $branch
-        if( auth()->user()->id == $branch->restorant->user_id || auth()->user()->hasRole('admin') || auth()->user()->hasRole('owner') ){
+        // echo $branch->restorant->user_id;
+        // exit;
+        if( auth()->user()->id == $branch->restorant->user_id || auth()->user()->hasRole('admin') || auth()->user()->hasRole('owner') || auth()->user()->hasRole('manager') ){
             return view('branch.edit', [
                 'branch' => $branch,
                 'days' => $days
