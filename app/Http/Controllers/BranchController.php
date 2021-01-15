@@ -12,6 +12,7 @@ use App\Notifications\BranchCreated;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\WelcomeNotification;
 use App\Restorant;
+use App\Hours;
 use Session;
 
 class BranchController extends Controller
@@ -150,11 +151,13 @@ class BranchController extends Controller
         // auth check and show the form for editing the $branch
         // echo $branch->restorant->user_id;
         // exit;
+        $hours = Hours::where(['branch_id' => $branch->id])->get($hoursRange)->first();
         if( auth()->user()->id == $branch->restorant->user_id || auth()->user()->hasRole('admin') || auth()->user()->hasRole('owner') || auth()->user()->hasRole('manager') ){
             return view('branch.edit', [
                 'branch' => $branch,
-                'days' => $days
-                ]);
+                'days' => $days,
+                'hours' => $hours]);
+
         }
         return redirect()->route('home')->withStatus(__('No Access'));
     }
@@ -237,5 +240,48 @@ class BranchController extends Controller
         $name= str_replace( $cyr,$lat, $name);
 
         return strtolower(preg_replace('/[^A-Za-z0-9]/', '', $name));
+    }
+
+    public function workingHours(Request $request)
+    {
+        $hours = Hours::where(['branch_id' => $request->branchid])->first();
+
+        if($hours == null){
+
+            $hours = new Hours();
+            $hours->branch_id = $request->branchid;
+            $hours->{'0_from'} = $request->{'0_from'} ?? null;
+            $hours->{'0_to'} = $request->{'0_to'} ?? null;
+            $hours->{'1_from'} = $request->{'1_from'} ?? null;
+            $hours->{'1_to'} = $request->{'1_to'} ?? null;
+            $hours->{'2_from'} = $request->{'2_from'} ?? null;
+            $hours->{'2_to'} = $request->{'2_to'} ?? null;
+            $hours->{'3_from'} = $request->{'3_from'} ?? null;
+            $hours->{'3_to'} = $request->{'3_to'} ?? null;
+            $hours->{'4_from'} = $request->{'4_from'} ?? null;
+            $hours->{'4_to'} = $request->{'4_to'} ?? null;
+            $hours->{'5_from'} = $request->{'5_from'} ?? null;
+            $hours->{'5_to'} = $request->{'5_to'} ?? null;
+            $hours->{'6_from'} = $request->{'6_from'} ?? null;
+            $hours->{'6_to'} = $request->{'6_to'} ?? null;
+            $hours->save();
+        }
+
+        $hours->{'0_from'} = $request->{'0_from'} ?? null;
+        $hours->{'0_to'} = $request->{'0_to'} ?? null;
+        $hours->{'1_from'} = $request->{'1_from'} ?? null;
+        $hours->{'1_to'} = $request->{'1_to'} ?? null;
+        $hours->{'2_from'} = $request->{'2_from'} ?? null;
+        $hours->{'2_to'} = $request->{'2_to'} ?? null;
+        $hours->{'3_from'} = $request->{'3_from'} ?? null;
+        $hours->{'3_to'} = $request->{'3_to'} ?? null;
+        $hours->{'4_from'} = $request->{'4_from'} ?? null;
+        $hours->{'4_to'} = $request->{'4_to'} ?? null;
+        $hours->{'5_from'} = $request->{'5_from'} ?? null;
+        $hours->{'5_to'} = $request->{'5_to'} ?? null;
+        $hours->{'6_from'} = $request->{'6_from'} ?? null;
+        $hours->{'6_to'} = $request->{'6_to'} ?? null;
+        $hours->update();
+         return redirect()->route('branch.edit',$request->branchid)->withStatus(__('Working hours successfully updated!'));
     }
 }

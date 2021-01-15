@@ -8,7 +8,7 @@
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 </div>
 <div class="container-fluid mt--7">
-    <div class="row">
+    <div class="row"> 
         <div class="col-xl-6 mb-5 mb-xl-0 order-xl-1">
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
@@ -187,7 +187,7 @@
                     <h5 class="h3 mb-0">{{ __("Working Hours") }}</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('restaurant.workinghours') }}" autocomplete="off"
+                    <form method="post" action="{{ route('branch.workinghours') }}" autocomplete="off"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="branchid" name="branchid" value="{{ $branch->id }}" />
@@ -242,8 +242,92 @@
 @endsection
 
 @section('js')
+<script type="text/javascript">
+"use strict";
+var defaultHourFrom = "09:00";
+var defaultHourTo = "17:00";
+
+var timeFormat = '{{ env('TIME_FORMAT ',' 24 hours ') }}';
+
+function formatAMPM(date) {
+    //var hours = date.getHours();
+    //var minutes = date.getMinutes();
+    var hours = date.split(':')[0];
+    var minutes = date.split(':')[1];
+
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    //minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
+//console.log(formatAMPM("19:05"));
+
+var config = {
+    enableTime: true,
+    dateFormat: timeFormat == "AM/PM" ? "h:i K" : "H:i",
+    noCalendar: true,
+    altFormat: timeFormat == "AM/PM" ? "h:i K" : "H:i",
+    altInput: true,
+    allowInput: true,
+    time_24hr: timeFormat == "AM/PM" ? false : true,
+    onChange: [
+        function(selectedDates, dateStr, instance) {
+            //...
+            this._selDateStr = dateStr;
+        },
+    ],
+    onClose: [
+        function(selDates, dateStr, instance) {
+            if (this.config.allowInput && this._input.value && this._input.value !== this._selDateStr) {
+                this.setDate(this.altInput.value, false);
+            }
+        }
+    ]
+};
+
+$("input[type='checkbox'][name='days']").change(function() {
+
+
+    var hourFrom = flatpickr($('#' + this.value + '_from'), config);
+    var hourTo = flatpickr($('#' + this.value + '_to'), config);
+
+    if (this.checked) {
+        hourFrom.setDate(timeFormat == "AP/PM" ? formatAMPM(defaultHourFrom) : defaultHourFrom, false);
+        hourTo.setDate(timeFormat == "AP/PM" ? formatAMPM(defaultHourTo) : defaultHourTo, false);
+    } else {
+        hourFrom.clear();
+        hourTo.clear();
+    }
+}); 
+//Initialize working hours
+function initializeWorkingHours() {
+    var workingHours = <?php echo json_encode($hours); ?>;
+    if (workingHours != null) {
+        Object.keys(workingHours).map((key, index) => {
+            if (workingHours[key] != null) {
+                var hour = flatpickr($('#' + key), config);
+                hour.setDate(workingHours[key], false);
+
+                var day_key = key.split('_')[0];
+                $('#day' + day_key).attr('checked', 'checked');
+            }
+        })
+    }
+}
+
+window.onload = function() {
+    //var map, infoWindow, marker, lng, lat;
+
+    //Working hours
+    initializeWorkingHours(); 
+} 
+</script>
+
 <script>
-    window.intlTelInput(document.getElementById("phone_manager"), {
+    window.intlTelInput(document.getElementById("phone_owner"), {
     // any initialisation options go here
     customContainer: "w-100"
     });

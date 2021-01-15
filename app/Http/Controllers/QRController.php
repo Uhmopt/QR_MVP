@@ -42,9 +42,10 @@ class QRController extends Controller
 
      public function show(Branch $branch){
          $domain=env('APP_URL');
-         
          if(auth()->user()->hasRole('owner')){
              $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain."/".$branch->name;
+         } else if(auth()->user()->hasRole('manager')) {
+             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".$branch->subdomain."/".$branch->name;
          }
  
          if(env('WILDCARD_DOMAIN_READY',false)){

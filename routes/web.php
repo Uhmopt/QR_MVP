@@ -154,6 +154,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('branch/store', 'BranchController@store')->name('branch.store');
     Route::put('branch/{branch}/update', 'BranchController@update')->name('branch.update');
     Route::delete('branch/destroy', 'BranchController@destroy')->name('branch.destroy');
+    Route::post('/branch/workinghours', 'BranchController@workingHours')->name('branch.workinghours');
 });
 
 Route::get('/footer-pages', 'PagesController@getPages');

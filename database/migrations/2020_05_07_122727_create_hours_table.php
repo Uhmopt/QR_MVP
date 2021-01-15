@@ -40,6 +40,7 @@ class CreateHoursTable extends Migration
             $table->string('6_to')->nullable();
 
             $table->unsignedBigInteger('restorant_id');
+            $table->unsignedBigInteger('branch_id');
             $table->foreign('restorant_id')->references('id')->on('restorants');
         });
 

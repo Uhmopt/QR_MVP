@@ -9,7 +9,7 @@ class Branch extends MyModel
 {
     // use Rateable;
     protected $fillable = ['name', 'user_id', 'restorant_id','description'];
-    protected $appends = ['alias','logom','icon','coverm'];
+    protected $appends = ['alias','logom','icon','coverm', 'resdomain'];
     protected $imagePath='/uploads/restorants/';
     
     public function user()
@@ -25,6 +25,11 @@ class Branch extends MyModel
     public function getAliasAttribute()
     {
         return $this->subdomain;
+    }
+
+    public function getResdomainAttribute()
+    {
+        return $this->restorant->subdomain;
     }
 
     public function getLogomAttribute()
