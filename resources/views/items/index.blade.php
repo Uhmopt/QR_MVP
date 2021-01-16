@@ -18,12 +18,15 @@
                                         <h3 class="mb-0">{{ __('Restaurant Menu Management') }}</h3>
                                     </div>
                                     <div class="col-auto">
+                                    @hasrole('admin|owner')
                                         <button class="btn btn-icon btn-1 btn-sm btn-primary" type="button" data-toggle="modal" data-target="#modal-items-category" data-toggle="tooltip" data-placement="top" title="{{ __('Add new category')}}">
                                             <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                                         </button>
                                         @if($canAdd)
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-import-items" onClick=(setRestaurantId({{ $restorant_id }}))>{{ __('Import from CSV') }}</button>
                                         @endif
+                                    @endhasrole
+
                                     </div>
                                 </div>
                             </div>

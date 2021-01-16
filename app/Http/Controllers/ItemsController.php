@@ -39,6 +39,20 @@ class ItemsController extends Controller
                 'canAdd'=>$canAdd,
                 'categories' => auth()->user()->restorant->categories->reverse(), 
                 'restorant_id' => auth()->user()->restorant->id]);
+        } else if(auth()->user()->hasRole('manager')) {
+            $canAdd=true;
+            if(config('app.isqrsaas')){
+                //In QRsaas with plans, we need to check if they can add new items.
+                $currentPlan=Plans::findOrFail(auth()->user()->mplanid());
+                $items=Items::whereIn('category_id', auth()->user()->branch->restorant->categories->pluck('id')->toArray()); 
+                if($currentPlan->limit_items!=0){
+                    $canAdd=$currentPlan->limit_items>$items->count();
+                }
+            }
+            return view('items.index', [
+                'canAdd'=>$canAdd,
+                'categories' => auth()->user()->branch->restorant->categories->reverse(), 
+                'restorant_id' => auth()->user()->branch->restorant->id]);
         }else
             return redirect()->route('orders.index')->withStatus(__('No Access'));
     }
@@ -114,7 +128,7 @@ class ItemsController extends Controller
     public function edit(Items $item)
     {
         //if item belongs to owner restorant menu return view
-        if(auth()->user()->hasRole('owner') && $item->category->restorant->id == auth()->user()->restorant->id || auth()->user()->hasRole('admin')){
+        if(auth()->user()->hasRole('owner') && $item->category->restorant->id == auth()->user()->restorant->id || auth()->user()->hasRole('admin') || auth()->user()->hasRole('manager')){
         
             return view('items.edit', 
             [
