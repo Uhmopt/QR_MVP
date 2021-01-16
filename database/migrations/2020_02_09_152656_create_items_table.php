@@ -20,6 +20,7 @@ class CreateItemsTable extends Migration
             $table->string('image');
             $table->float('price');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('branch_id');
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
         });

@@ -41,17 +41,22 @@ class ItemsController extends Controller
                 'restorant_id' => auth()->user()->restorant->id]);
         } else if(auth()->user()->hasRole('manager')) {
             $canAdd=true;
+            $items= null;
             if(config('app.isqrsaas')){
                 //In QRsaas with plans, we need to check if they can add new items.
                 $currentPlan=Plans::findOrFail(auth()->user()->mplanid());
-                $items=Items::whereIn('category_id', auth()->user()->branch->restorant->categories->pluck('id')->toArray()); 
+                $items=Items::where(['branch_id' => auth()->user()->branch->id])->whereIn('category_id', auth()->user()->branch->restorant->categories->pluck('id')->toArray()); 
                 if($currentPlan->limit_items!=0){
                     $canAdd=$currentPlan->limit_items>$items->count();
                 }
-            }
+            } else {
+                $items=Items::where(['branch_id' => auth()->user()->branch->id])->get();                             
+            } 
             return view('items.index', [
                 'canAdd'=>$canAdd,
                 'categories' => auth()->user()->branch->restorant->categories->reverse(), 
+                'branch_id' => auth()->user()->branch->id,
+                'items' => $items,
                 'restorant_id' => auth()->user()->branch->restorant->id]);
         }else
             return redirect()->route('orders.index')->withStatus(__('No Access'));
@@ -101,6 +106,10 @@ class ItemsController extends Controller
                 ]
             );
         }
+        if(auth()->user()->hasRole('manager')) {
+            $item->branch_id = auth()->user()->branch->id;
+        }
+
         $item->save();
 
         return redirect()->route('items.index')->withStatus(__('Item successfully updated.'));

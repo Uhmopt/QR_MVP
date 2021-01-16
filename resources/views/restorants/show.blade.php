@@ -122,20 +122,37 @@
                 </div>
                 @endif
                 <div class="row {{ clean(str_replace(' ', '', strtolower($category->name)).strval($key)) }}">
-                    @foreach ($category->items as $item)
-                        @if($item->available == 1)
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                            <div class="strip">
-                                <figure>
-                                    <a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)"><img src="{{ $item->logom }}" loading="lazy" data-src="{{ config('global.restorant_details_image') }}" class="img-fluid lazy" alt=""></a>
-                                </figure>
-                                <span class="res_title"><b><a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)">{{ $item->name }}</a></b></span><br />
-                                <span class="res_description">{{ $item->short_description}}</span><br />
-                                <span class="res_mimimum">@money($item->price, env('CASHIER_CURRENCY','usd'),true)</span>
+                    @if($role == '')
+                        @foreach ($category->items as $item)
+                            @if($item->available == 1)
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                <div class="strip">
+                                    <figure>
+                                        <a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)"><img src="{{ $item->logom }}" loading="lazy" data-src="{{ config('global.restorant_details_image') }}" class="img-fluid lazy" alt=""></a>
+                                    </figure>
+                                    <span class="res_title"><b><a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)">{{ $item->name }}</a></b></span><br />
+                                    <span class="res_description">{{ $item->short_description}}</span><br />
+                                    <span class="res_mimimum">@money($item->price, env('CASHIER_CURRENCY','usd'),true)</span>
+                                </div>
                             </div>
-                        </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @elseif($role == 'branch')
+                        @foreach ($items as $item)
+                            @if($item->available == 1 && $item->category_id == $category->id)
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                                <div class="strip">
+                                    <figure>
+                                        <a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)"><img src="{{ $item->logom }}" loading="lazy" data-src="{{ config('global.restorant_details_image') }}" class="img-fluid lazy" alt=""></a>
+                                    </figure>
+                                    <span class="res_title"><b><a onClick="setCurrentItem({{ $item->id }})" href="javascript:void(0)">{{ $item->name }}</a></b></span><br />
+                                    <span class="res_description">{{ $item->short_description}}</span><br />
+                                    <span class="res_mimimum">@money($item->price, env('CASHIER_CURRENCY','usd'),true)</span>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
             @endforeach
             @else

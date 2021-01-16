@@ -435,16 +435,6 @@ class FrontEndController extends Controller
             exit;
         }
 
-        if ($alias_branch == "") {
-            $branch = null;
-        } else {
-            $branch = Branch::where('name', $alias_branch)->first();
-            if (!$branch) {
-                abort(404);
-                exit;
-            }
-        }
-
         //ratings usernames
         $usernames = [];
         if ($restorant && $restorant->ratings) {
@@ -476,9 +466,23 @@ class FrontEndController extends Controller
         'openingTime' => $restorant[0]->hours&&$restorant[0]->hours[$ourDateOfWeek."_from"]?$openingTime:null,
         'closingTime' => $restorant[0]->hours&&$restorant[0]->hours[$ourDateOfWeek."_to"]?$closingTime:null,
         ]);*/
-
         $openingTime = $restorant->hours && $restorant->hours[$ourDateOfWeek . "_from"] ? date($format, strtotime($restorant->hours[$ourDateOfWeek . "_from"])) : null;
         $closingTime = $restorant->hours && $restorant->hours[$ourDateOfWeek . "_to"] ? date($format, strtotime($restorant->hours[$ourDateOfWeek . "_to"])) : null;
+
+
+        if ($alias_branch == "") {
+            $branch = null;
+            $items = [];
+            $role = '';                            
+        } else {
+            $branch = Branch::where('subdomain', $alias_branch)->first();
+            if (!$branch) {
+                abort(404);
+                exit;
+            }
+            $items=Items::where(['branch_id' => $branch->id])->get(); 
+            $role = 'branch';                            
+        }
 
         //dd($restorant->categories[1]->items[0]->extras);
         return view('restorants.show', [
@@ -487,6 +491,8 @@ class FrontEndController extends Controller
             'closingTime' => $closingTime,
             'usernames' => $usernames,
             'branch' => $branch,
+            'items' => $items,
+            'role' => $role,
         ]);
     }
 

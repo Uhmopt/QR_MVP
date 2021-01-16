@@ -64,7 +64,7 @@
                                                 <span class="btn-inner--icon"><i class="fa fa-plus"></i> {{ __('Menu size limit reaced') }}</span>
                                             </a>
                                         @endif
-                                       
+                                        @hasrole('admin|owner')
                                         <form action="{{ route('categories.destroy', $category) }}" method="post">
                                             @csrf
                                             @method('delete')
@@ -74,8 +74,9 @@
                                                     <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
                                                 </button>
                                             @endif
-
+                                        
                                         </form>
+                                        @endhasrole
                                     </div>
                                 </div>
                             </div>
@@ -85,6 +86,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="row row-grid">
+                                    @hasrole('admin|owner')
                                     @foreach ( $category->items as $item)
                                         <div class="col-lg-3">
                                             <a href="{{ route('items.edit', $item) }}">
@@ -108,7 +110,37 @@
                                                 <br/>
                                             </a>
                                         </div>
-                                    @endforeach
+                                    @endforeach                                    
+                                    @endhasrole
+                                    
+                                    @hasrole('manager')
+                                        @foreach ( $items as $item)
+                                        @if($item->category_id == $category->id)
+                                        <div class="col-lg-3">
+                                            <a href="{{ route('items.edit', $item) }}">
+                                                <div class="card">
+                                                    <img class="card-img-top" src="{{ $item->logom }}" alt="...">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title text-primary text-uppercase">{{ $item->name }}</h3>
+                                                        <p class="card-text description mt-3">{{ $item->description }}</p>
+
+                                                        <span class="badge badge-primary badge-pill">@money($item->price, env('CASHIER_CURRENCY','usd'),true)</span>
+
+                                                        <p class="mt-3 mb-0 text-sm">
+                                                            @if($item->available == 1)
+                                                            <span class="text-success mr-2">{{ __("AVAILABLE") }}</span>
+                                                            @else
+                                                            <span class="text-danger mr-2">{{ __("UNAVAILABLE") }}</span>
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        @endforeach    
+                                    @endhasrole
                                 </div>
                             </div>
                         </div>
