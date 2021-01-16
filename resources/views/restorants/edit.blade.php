@@ -237,6 +237,7 @@
                         <div class="form-group">
                             @foreach($days as $key => $value)
                             <br />
+
                             <div class="row">
                                 <div class="col-4">
                                     <div class="custom-control custom-checkbox">
@@ -383,9 +384,7 @@ $("#clear_area").on("click", function() {
 
 //Initialize working hours
 function initializeWorkingHours() {
-    var workingHours = {
-        !!json_encode($hours)!!
-    };
+    var workingHours = <?php echo json_encode($hours); ?>;
     if (workingHours != null) {
         Object.keys(workingHours).map((key, index) => {
             if (workingHours[key] != null) {

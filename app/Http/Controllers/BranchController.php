@@ -250,6 +250,7 @@ class BranchController extends Controller
 
             $hours = new Hours();
             $hours->branch_id = $request->branchid;
+            $hours->restorant_id =  $request->restorantid;
             $hours->{'0_from'} = $request->{'0_from'} ?? null;
             $hours->{'0_to'} = $request->{'0_to'} ?? null;
             $hours->{'1_from'} = $request->{'1_from'} ?? null;

@@ -191,6 +191,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="branchid" name="branchid" value="{{ $branch->id }}" />
+                        <input type="hidden" id="restorantid" name="restorantid" value="{{ $branch->restorant->id }}" />
                         <div class="form-group">
                             @foreach($days as $key => $value)
                             <br />

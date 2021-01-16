@@ -147,7 +147,7 @@ class RestorantController extends Controller
             array_push($hoursRange, $to);
         }
 
-        $hours = Hours::where(['restorant_id' => $restaurant->id])->get($hoursRange)->first();
+        $hours = Hours::where(['restorant_id' => $restaurant->id, 'branch_id' => 0])->get($hoursRange)->first();
 
         if(auth()->user()->id==$restaurant->user_id||auth()->user()->hasRole('admin')){
             //return view('restorants.edit', compact('restorant'));  
@@ -291,12 +291,13 @@ class RestorantController extends Controller
 
     public function workingHours(Request $request)
     {
-        $hours = Hours::where(['restorant_id' => $request->rid])->first();
+        $hours = Hours::where(['restorant_id' => $request->rid, 'branch_id' => 0])->first();
 
         if($hours == null){
 
             $hours = new Hours();
             $hours->restorant_id = $request->rid;
+            $hours->branch_id = 0;
             $hours->{'0_from'} = $request->{'0_from'} ?? null;
             $hours->{'0_to'} = $request->{'0_to'} ?? null;
             $hours->{'1_from'} = $request->{'1_from'} ?? null;
