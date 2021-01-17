@@ -14,7 +14,7 @@ class QRController extends Controller
         if(auth()->user()->hasRole('owner')){
             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain;
         }else if(auth()->user()->hasRole('manager')){
-            $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->branch->restorant->subdomain."/".auth()->user()->branch->name;
+            $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->branch->restorant->subdomain."/".auth()->user()->branch->subdomain;
         }
 
         if(env('WILDCARD_DOMAIN_READY',false)){
@@ -43,15 +43,14 @@ class QRController extends Controller
      public function show(Branch $branch){
          $domain=env('APP_URL');
          if(auth()->user()->hasRole('owner')){
-             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain."/".$branch->name;
+             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain;
          } else if(auth()->user()->hasRole('manager')) {
-             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".$branch->subdomain."/".$branch->name;
+             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".$branch->restorant->subdomain."/".$branch->subdomain;
          }
  
          if(env('WILDCARD_DOMAIN_READY',false)){
              $linkToTheMenu=(isset($_SERVER['HTTPS'])&&$_SERVER["HTTPS"] ?"https://":"http://").$restorant->subdomain.".".$_SERVER['HTTP_HOST'];
          }
- 
          $dataToPass=[
              'url'=>$linkToTheMenu,
              'titleGenerator'=>__('Restaurant QR Generators'),
