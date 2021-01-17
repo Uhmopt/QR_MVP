@@ -42,6 +42,9 @@ class QRController extends Controller
 
      public function show(Branch $branch){
          $domain=env('APP_URL');
+         if (!$domain) {
+            $domain = "http://localhost:8000";
+        }
          if(auth()->user()->hasRole('owner')){
              $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain;
          } else if(auth()->user()->hasRole('manager')) {
