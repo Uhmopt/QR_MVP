@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class QRController extends Controller
 {
     public function index(){
-        $domain=env('APP_URL');
-        
+        $domain=env('APP_URL'); 
+        if (!$domain) {
+            $domain = "http://localhost:8000";
+        }
         if(auth()->user()->hasRole('owner')){
             $linkToTheMenu=$domain."/".env('URL_ROUTE','restaurant')."/".auth()->user()->restorant->subdomain;
         }else if(auth()->user()->hasRole('manager')){
@@ -20,7 +22,6 @@ class QRController extends Controller
         if(env('WILDCARD_DOMAIN_READY',false)){
             $linkToTheMenu=(isset($_SERVER['HTTPS'])&&$_SERVER["HTTPS"] ?"https://":"http://").$restorant->subdomain.".".$_SERVER['HTTP_HOST'];
         }
-
         $dataToPass=[
             'url'=>$linkToTheMenu,
             'titleGenerator'=>__('Restaurant QR Generators'),
@@ -34,8 +35,7 @@ class QRController extends Controller
             'downloadPrintTemplates'=>__('Download Print Templates'),
             'templates'=>explode(",",env('templates',"/impactfront/img/menu_template_1.jpg,/impactfront/img/menu_template_2.jpg")),
             'linkToTemplates'=>env('linkToTemplates',"/impactfront/img/templates.zip")
-        ];  
-
+        ];   
         return view('qrsaas.qrgen')->with('data', json_encode($dataToPass));
      }
 
